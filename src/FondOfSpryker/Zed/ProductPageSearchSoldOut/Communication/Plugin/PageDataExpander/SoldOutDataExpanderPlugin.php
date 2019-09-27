@@ -2,6 +2,7 @@
 
 namespace FondOfSpryker\Zed\ProductPageSearchSoldOut\Communication\Plugin\PageDataExpander;
 
+use FondOfSpryker\Shared\ProductPageSearchSoldOut\ProductPageSearchSoldOutConstants;
 use Generated\Shared\Search\PageIndexMap;
 use Generated\Shared\Transfer\ProductPageSearchTransfer;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
@@ -19,11 +20,11 @@ class SoldOutDataExpanderPlugin extends AbstractPlugin implements ProductPageDat
      */
     public function expandProductPageData(array $productData, ProductPageSearchTransfer $productAbstractPageSearchTransfer): void
     {
-        if (!array_key_exists('attributes', $productData)) {
+        if (!array_key_exists(ProductPageSearchSoldOutConstants::ATTRIBUTES, $productData)) {
             return;
         }
 
-        $productAttributeData = \json_decode($productData['attributes'], true);
+        $productAttributeData = \json_decode($productData[ProductPageSearchSoldOutConstants::ATTRIBUTES], true);
 
         if (!array_key_exists(PageIndexMap::IS_SOLD_OUT, $productAttributeData)) {
             return;
